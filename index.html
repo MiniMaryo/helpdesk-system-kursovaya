@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HelpDesk для сотрудников</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="auth-screen" id="authScreen">
+    <div class="auth-card">
+      <div class="auth-info">
+        <p class="label">Курсовой проект</p>
+        <h1>Система технической поддержки сотрудников</h1>
+        <p>
+          Приложение позволяет сотрудникам регистрироваться, создавать заявки,
+          смотреть существующие обращения и переписываться со специалистом поддержки.
+        </p>
+      </div>
+
+      <div class="auth-box">
+        <div class="tabs">
+          <button class="tab active" data-auth-tab="employeeLogin">Вход сотрудника</button>
+          <button class="tab" data-auth-tab="employeeRegister">Регистрация</button>
+        </div>
+
+        <form class="auth-form" id="employeeLoginForm">
+          <h2>Вход сотрудника</h2>
+          <label>Логин<input type="text" id="loginEmployeeLogin" required></label>
+          <label>Пароль<input type="password" id="loginEmployeePassword" required></label>
+          <button class="main-btn" type="submit">Войти</button>
+        </form>
+
+        <form class="auth-form hidden" id="employeeRegisterForm">
+          <h2>Регистрация сотрудника</h2>
+          <label>ФИО<input type="text" id="registerName" required></label>
+          <label>Отдел<input type="text" id="registerDepartment" required></label>
+          <label>Логин<input type="text" id="registerLogin" required></label>
+          <label>Пароль<input type="password" id="registerPassword" required></label>
+          <button class="main-btn" type="submit">Зарегистрироваться</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="app hidden" id="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-head">
+        <div>
+          <p class="label">Пользователь</p>
+          <h2 id="userName">-</h2>
+          <span id="userRole">-</span>
+        </div>
+        <button class="icon-btn" id="logoutBtn" title="Выйти"><span>×</span></button>
+      </div>
+
+      <div class="sidebar-tools">
+        <input type="search" id="searchInput" placeholder="Поиск по тикетам">
+        <button class="plain-btn" id="toggleCategoriesBtn">Показать по категориям</button>
+      </div>
+
+      <div class="category-panel hidden" id="categoryPanel"></div>
+      <div class="ticket-list" id="ticketList"></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div>
+          <p class="label">Рабочая область</p>
+          <h1 id="pageTitle">Актуальные тикеты</h1>
+        </div>
+        <div class="topbar-actions">
+          <button class="plain-btn hidden" id="homeBtn">На главную</button>
+          <button class="main-btn" id="createTicketBtn">Создать тикет</button>
+        </div>
+      </header>
+
+      <section class="dashboard" id="dashboard"></section>
+      <section class="ticket-view hidden" id="ticketView"></section>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="ticketModal">
+    <form class="modal-card" id="ticketForm">
+      <div class="modal-head">
+        <h2>Новый тикет</h2>
+        <button type="button" class="icon-btn" id="closeModalBtn">×</button>
+      </div>
+
+      <label>Категория
+        <select id="ticketCategory" required></select>
+      </label>
+      <label>Тема
+        <input type="text" id="ticketTitle" required placeholder="Например, не работает принтер">
+      </label>
+      <label>Статус проблемы
+        <select id="ticketStatus" required></select>
+      </label>
+      <label>Описание
+        <textarea id="ticketDescription" rows="5" required placeholder="Опишите проблему подробнее"></textarea>
+      </label>
+      <button class="main-btn" type="submit">Отправить заявку</button>
+    </form>
+  </div>
+
+  <aside class="chat-drawer hidden" id="chatDrawer">
+    <div class="chat-head">
+      <div>
+        <p class="label">Чат тикета</p>
+        <h2 id="chatTitle">-</h2>
+      </div>
+      <button class="icon-btn" id="closeChatBtn">×</button>
+    </div>
+    <div class="messages" id="messages"></div>
+    <form class="chat-form" id="chatForm">
+      <input type="text" id="messageText" placeholder="Напишите сообщение" required>
+      <button class="main-btn" type="submit">Отправить</button>
+    </form>
+  </aside>
+
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
